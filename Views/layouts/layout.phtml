@@ -6,6 +6,7 @@
    <title>Artister - DevNet Framework</title>
    <!-- styles -->
    <link href="/lib/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+   <link href="/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
    <header>
@@ -14,6 +15,9 @@
    <main>
       <?= $this->renderBody() ?>
    </main>
+   <footer>
+      <?= $this->renderPartial('layouts/footer') ?>
+   </footer>
    <!-- scripts -->
    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
    </body>
