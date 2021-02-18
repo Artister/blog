@@ -3,8 +3,8 @@
 use Artister\System\Boot\launcher;
 use Application\Program;
 
-$autoloadPath   = __DIR__ . "/../vendor/autoload.php";
-$runtimePath    = "runtime.json";
+$autoloadPath = __DIR__ . "/../vendor/autoload.php";
+$projectPath  = "../project.phproj";
 
 if (file_exists($autoloadPath))
 {
@@ -12,25 +12,25 @@ if (file_exists($autoloadPath))
 }
 else
 {
-    $cache          = new stdClass();
-    $cache->Path    = "path/to/devnet";
+    $project = new SimpleXMLElement("<project></project>");
 
-    if (file_exists($runtimePath))
+    if (file_exists($projectPath))
     {
-        $content    = file_get_contents($runtimePath);
-        $cache      = json_decode($content);
+        $project = simplexml_load_file($projectPath);
     }
 
-    if (!file_exists($cache->Path))
+    if (!file_exists((string)$project->autoload->path."/autoload.php"))
     {
-        $cache->Path    = exec("devnet --path");
-        $content        = json_encode($cache, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
-        $file           = fopen($runtimePath, 'w');
-        fwrite($file, $content);
-        fclose($file);
+        $project->autoload->path = dirname(exec("devnet --path"));
+        $dom                     = new DOMDocument();
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput       = true;
+        
+        $dom->loadXML($project->asXML());
+        $dom->save($projectPath);
     }
 
-    require dirname($cache->Path) . "/autoload.php";
+    require (string)$project->autoload->path."/autoload.php";
 }
 
 $launcher = launcher::getLauncher();
