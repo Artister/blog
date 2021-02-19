@@ -24,7 +24,7 @@ class AccountController extends Controller
         $emailClaim = $user->findClaim(fn($claim) => $claim->Type == "Email");
         $email = $emailClaim ? $emailClaim->Value : null;
         $this->ViewData['Email'] = $email;
-        return $this->view('account/index');
+        return $this->view();
     }
 
     public function login(LoginForm $form) : IActionResult
@@ -33,12 +33,12 @@ class AccountController extends Controller
 
         if ($user->isAuthenticated())
         {
-            return $this->redirect('account/index');
+            return $this->redirect('Account/index');
         }
 
         if (!$form->isValide())
         {
-            return $this->view('account/login');
+            return $this->view();
         }
 
         $identity = new ClaimsIdentity('AuthenticationUser');
@@ -48,14 +48,14 @@ class AccountController extends Controller
         $authentication = $this->HttpContext->Authentication;
         $authentication->SignIn($user, $form->Remember);
 
-        return $this->redirect('account/index');
+        return $this->redirect('Account/index');
     }
 
     public function logout() : IActionResult
     {
         $authentication = $this->HttpContext->Authentication;
         $authentication->SignOut();
-        return $this->redirect('account/login');
+        return $this->redirect('Account/login');
     }
 
     public function register() : IActionResult
