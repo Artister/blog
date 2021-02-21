@@ -16,4 +16,9 @@ class HomeController extends Controller
     {
         return $this->view();
     }
+
+    public function contact() : IActionResult
+    {
+        return $this->view();
+    }
 }
