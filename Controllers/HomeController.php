@@ -21,4 +21,9 @@ class HomeController extends Controller
     {
         return $this->view();
     }
+
+    public function error() : IActionResult
+    {
+        return $this->view();
+    }
 }
