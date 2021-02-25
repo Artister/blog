@@ -11,4 +11,9 @@ class BlogController extends Controller
     {
         return $this->view();
     }
+
+    public function post() : IActionResult
+    {
+        return $this->view();
+    }
 }
