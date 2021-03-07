@@ -9,6 +9,7 @@ use Artister\Web\Extensions\ServiceCollectionExtensions;
 use Artister\Web\Extensions\ApplicationBuilderExtensions;
 use Artister\Entity\Mysql\MysqlEntityOptionsExtension;
 use Application\Models\DbManager;
+use Application\Models\User;
 
 class Startup
 {
@@ -31,6 +32,8 @@ class Startup
         {
             $options->useMysql("//root:root@127.0.0.1/blog");
         });
+
+        $services->addIdentity(User::class);
     }
 
     public function configure(IApplicationBuilder $app)

@@ -5,26 +5,30 @@ namespace Application\Controllers;
 use Artister\Web\Mvc\Controller;
 use Artister\Web\Mvc\IActionResult;
 use Artister\Web\Mvc\Filters\AuthorizeFilter;
-use Artister\Web\Security\ClaimsPrincipal;
-use Artister\Web\Security\ClaimsIdentity;
-use Artister\Web\Security\ClaimType;
-use Artister\Web\Security\Claim;
+use Artister\Web\Identity\IdentityManager;
+use Artister\Web\Identity\UserManager;
 use Application\Models\LoginForm;
+use Application\Models\RegisterForm;
+use Application\Models\User;
 
 class AccountController extends Controller
 {
-    public function __construct()
+    private IdentityManager $Identity;
+    private UserManager $Users;
+
+    public function __construct(IdentityManager $identity, UserManager $users)
     {
+        $this->Identity = $identity;
+        $this->Users = $users;
+
         $this->filter('index', AuthorizeFilter::class);
     }
 
     public function index() : IActionResult
     {
-        $user = $this->HttpContext->User;
-        $emailClaim = $user->findClaim(fn($claim) => $claim->Type == "Email");
-        $email = $emailClaim ? $emailClaim->Value : null;
-        $this->ViewData['Email'] = $email;
-        return $this->view();
+        $user = $this->Users->getUser();
+        $this->ViewData['Email'] = $user->Username;
+        return $this->view('account/index');
     }
 
     public function login(LoginForm $form) : IActionResult
@@ -33,7 +37,7 @@ class AccountController extends Controller
 
         if ($user->isAuthenticated())
         {
-            return $this->redirect('Account/index');
+            return $this->redirect('account/index');
         }
 
         if (!$form->isValide())
@@ -41,25 +45,29 @@ class AccountController extends Controller
             return $this->view();
         }
 
-        $identity = new ClaimsIdentity('AuthenticationUser');
-        $identity->addClaim(new Claim(ClaimType::Email, $form->Username));
-        $identity->addClaim(new Claim(ClaimType::Role, 'Admin'));
-        $user = new ClaimsPrincipal($identity);
-        $authentication = $this->HttpContext->Authentication;
-        $authentication->SignIn($user, $form->Remember);
+        $this->Identity->signIn($form->Username, $form->Password, $form->Remember);
 
-        return $this->redirect('Account/index');
+        return $this->redirect('account/index');
     }
 
     public function logout() : IActionResult
     {
-        $authentication = $this->HttpContext->Authentication;
-        $authentication->SignOut();
-        return $this->redirect('Account/login');
+        $this->Identity->signOut();
+        return $this->redirect('account/login');
     }
 
-    public function register() : IActionResult
+    public function register(RegisterForm $form) : IActionResult
     {
-        return $this->view('account/register');
+        if (!$form->isValide())
+        {
+            return $this->view('account/register');
+        }
+
+        $user = new User();
+        $user->Username = $form->Email;
+        $user->Password = $form->Password;
+        $this->Users->create($user);
+
+        return $this->content("User {$user->Username} has been created");
     }
 }
