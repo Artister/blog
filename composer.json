@@ -12,13 +12,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.4.0",
-        "devnet/core": "dev-master",
         "devnet/web": "dev-master",
-        "devnet/entity": "dev-master"
-    },
-    "autoload": {
-        "psr-4": {
-            "Application\\": ""
-        }
+        "devnet/entity-mysql": "dev-master"
     }
 }

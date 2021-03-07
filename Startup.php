@@ -7,6 +7,8 @@ use Artister\System\Dependency\IServiceCollection;
 use Artister\Web\Dispatcher\IApplicationBuilder;
 use Artister\Web\Extensions\ServiceCollectionExtensions;
 use Artister\Web\Extensions\ApplicationBuilderExtensions;
+use Artister\Entity\Mysql\MysqlEntityOptionsExtension;
+use Application\Models\DbManager;
 
 class Startup
 {
@@ -24,6 +26,11 @@ class Startup
         $services->addAuthentication();
 
         $services->addAuthorisation();
+
+        $services->addEntityContext(DbManager::class, function($options)
+        {
+            $options->useMysql("//root:root@127.0.0.1/blog");
+        });
     }
 
     public function configure(IApplicationBuilder $app)
