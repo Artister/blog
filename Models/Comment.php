@@ -4,7 +4,7 @@ namespace Application\Models;
 
 use Artister\Entity\IEntity;
 
-class Post implements IEntity
+class Comment implements IEntity
 {
     private int $Id;
     private int $PostId;
