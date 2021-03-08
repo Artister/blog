@@ -49,7 +49,7 @@ class Startup
         $app->useEndpoint(function($routes)
         {
             //Routes::registerRoutes($routes);
-            $routes->mapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            $routes->mapRoute("default", "{controller=Home}/{action=index}/{id?}");
         });
     }
 }
