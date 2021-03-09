@@ -28,7 +28,7 @@ class AccountController extends Controller
     {
         $user = $this->Users->getUser();
         $this->ViewData['Email'] = $user->Username;
-        return $this->view('account/index');
+        return $this->view();
     }
 
     public function login(LoginForm $form) : IActionResult
@@ -60,7 +60,7 @@ class AccountController extends Controller
     {
         if (!$form->isValide())
         {
-            return $this->view('account/register');
+            return $this->view();
         }
 
         $user = new User();
