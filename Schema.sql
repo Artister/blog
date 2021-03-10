@@ -5,15 +5,28 @@ CREATE TABLE blog.`User` (
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Username_UNIQUE` (`Username`)
 );
+CREATE TABLE blog.`Role` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+);
+CREATE TABLE blog.`UserRole` (
+  `UserId` int NOT NULL,
+  `RoleId` int NOT NULL,
+  PRIMARY KEY (`UserId`,`RoleId`),
+  KEY `UserRole.RoleId_idx` (`RoleId`),
+  CONSTRAINT `UserRole.RoleId` FOREIGN KEY (`RoleId`) REFERENCES `Role` (`Id`),
+  CONSTRAINT `UserRole.UserId` FOREIGN KEY (`UserId`) REFERENCES `User` (`Id`)
+);
 CREATE TABLE blog.`Author` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `UserId` int NOT NULL,
   `Name` varchar(45) DEFAULT NULL,
+  `Email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`),
-  UNIQUE KEY `UserId_UNIQUE` (`UserId`),
-  KEY `UserFk_idx` (`UserId`),
-  CONSTRAINT `AuthorUser` FOREIGN KEY (`UserId`) REFERENCES `User` (`Id`)
+  KEY `Author.UserId_idx` (`UserId`),
+  CONSTRAINT `Author.UserId` FOREIGN KEY (`UserId`) REFERENCES `User` (`Id`)
 );
 CREATE TABLE blog.`Section` (
   `Id` int NOT NULL AUTO_INCREMENT,
@@ -38,10 +51,10 @@ CREATE TABLE blog.`Post` (
   `EditedAt` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `idPost_UNIQUE` (`Id`),
-  KEY `SectionId_idx` (`SectionId`),
-  KEY `AuthorFk_idx` (`AuthorId`),
-  CONSTRAINT `PostAuthor` FOREIGN KEY (`AuthorId`) REFERENCES `Author` (`Id`),
-  CONSTRAINT `PostSection` FOREIGN KEY (`SectionId`) REFERENCES `Section` (`Id`)
+  KEY `Post.SectionId_idx` (`SectionId`),
+  KEY `Post.AuthorId_idx` (`AuthorId`),
+  CONSTRAINT `Post.AuthorId` FOREIGN KEY (`AuthorId`) REFERENCES `Author` (`Id`),
+  CONSTRAINT `Post.SectionId` FOREIGN KEY (`SectionId`) REFERENCES `Section` (`Id`)
 );
 CREATE TABLE blog.`Comment` (
   `Id` int NOT NULL AUTO_INCREMENT,
@@ -52,9 +65,9 @@ CREATE TABLE blog.`Comment` (
   `EditedAt` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`),
-  KEY `PostFk_idx` (`PostId`),
-  KEY `AuthorFk_idx` (`AuthorId`),
-  CONSTRAINT `CommentAuthor` FOREIGN KEY (`AuthorId`) REFERENCES `Author` (`Id`),
-  CONSTRAINT `CommentPost` FOREIGN KEY (`PostId`) REFERENCES `Post` (`Id`)
+  KEY `Comment.PostId_idx` (`PostId`),
+  KEY `Comment.AuthorId_idx` (`AuthorId`),
+  CONSTRAINT `Comment.AuthorId` FOREIGN KEY (`AuthorId`) REFERENCES `Author` (`Id`),
+  CONSTRAINT `Comment.PostId` FOREIGN KEY (`PostId`) REFERENCES `Post` (`Id`)
 );
   
