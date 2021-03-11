@@ -8,7 +8,6 @@ use Artister\System\Collections\IList;
 class Section implements IEntity
 {
     private int $Id;
-    private int $PostId;
     private string $Title;
     private string $Slug;
     private string $Image;
