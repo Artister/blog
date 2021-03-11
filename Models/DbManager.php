@@ -17,9 +17,9 @@ class DbManager extends EntityContext
    public function __construct(EntityOptions $options)
    {
       parent::__construct($options);
-      $this->Profiles = $this->set(Author::class);
-      $this->Profiles = $this->set(Section::class);
-      $this->Profiles = $this->set(Post::class);
+      $this->Authors  = $this->set(Author::class);
+      $this->Sections = $this->set(Section::class);
+      $this->Postes   = $this->set(Post::class);
       $this->Comments = $this->set(Comment::class);
    }
 
