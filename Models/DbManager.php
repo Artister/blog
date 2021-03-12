@@ -11,7 +11,7 @@ class DbManager extends EntityContext
 {
    private EntitySet $Authors;
    private EntitySet $Sections;
-   private EntitySet $Postes;
+   private EntitySet $Posts;
    private EntitySet $Comments;
 
    public function __construct(EntityOptions $options)
@@ -19,7 +19,7 @@ class DbManager extends EntityContext
       parent::__construct($options);
       $this->Authors  = $this->set(Author::class);
       $this->Sections = $this->set(Section::class);
-      $this->Postes   = $this->set(Post::class);
+      $this->Posts    = $this->set(Post::class);
       $this->Comments = $this->set(Comment::class);
    }
 
