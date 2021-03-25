@@ -40,14 +40,14 @@ class DbManager extends EntityContext
 
       $builder->entity(Post::class)
          ->hasForeignKey('SectionId', Section::class)
-         ->hasForeignKey('AuthorId', Post::class)
+         ->hasForeignKey('AuthorId', Author::class)
          ->hasOne('Section', Section::class)
          ->hasOne('Author', Author::class)
          ->hasMany('Comments', Comment::class);
 
       $builder->entity(Comment::class)
          ->hasForeignKey('PostId', Post::class)
-         ->hasForeignKey('AuthorId', Post::class)
+         ->hasForeignKey('AuthorId', Author::class)
          ->hasOne('Post', Post::class)
          ->hasOne('Author', Author::class);
    }
