@@ -14,7 +14,7 @@ class Section implements IEntity
     private string $Description;
 
     // navigation properties
-    private IList $Postes;
+    private IList $Posts;
 
     public function __get(string $name)
     {

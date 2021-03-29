@@ -13,7 +13,7 @@ class Author implements IEntity
 
     // navigation properties
     private User $User;
-    private IList $Postes;
+    private IList $Posts;
 
     public function __get(string $name)
     {
