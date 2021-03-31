@@ -7,7 +7,7 @@ use Artister\System\Dependency\IServiceCollection;
 use Artister\Web\Dispatcher\IApplicationBuilder;
 use Artister\Web\Extensions\ServiceCollectionExtensions;
 use Artister\Web\Extensions\ApplicationBuilderExtensions;
-use Artister\Entity\Mysql\MysqlEntityOptionsExtension;
+use Artister\Entity\Providers\EntityOptionsExtensions;
 use Application\Models\DbManager;
 use Application\Models\User;
 
@@ -48,7 +48,6 @@ class Startup
         
         $app->useEndpoint(function($routes)
         {
-            //Routes::registerRoutes($routes);
             $routes->mapRoute("default", "{controller=Home}/{action=Index}/{id?}");
         });
     }
