@@ -3,6 +3,7 @@
 namespace Application\Models;
 
 use Artister\Entity\IEntity;
+use DateTime;
 
 class Comment implements IEntity
 {
@@ -10,6 +11,7 @@ class Comment implements IEntity
     private int $PostId;
     private int $AuthorId;
     private string $Content;
+    private DateTime $EditedAt;
 
     // navigation properties
     private Post $Post;

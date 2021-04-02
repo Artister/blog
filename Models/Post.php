@@ -4,6 +4,7 @@ namespace Application\Models;
 
 use Artister\Entity\IEntity;
 use Artister\System\Collections\IList;
+use DateTime;
 
 class Post implements IEntity
 {
@@ -15,6 +16,7 @@ class Post implements IEntity
     private string $Excerpt;
     private string $Image;
     private string $Content;
+    private DateTime $EditedAt;
 
     // navigation properties
     private Author $Author;
