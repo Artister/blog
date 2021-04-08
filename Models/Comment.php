@@ -2,7 +2,7 @@
 
 namespace Application\Models;
 
-use Artister\Entity\IEntity;
+use DevNet\Entity\IEntity;
 use DateTime;
 
 class Comment implements IEntity

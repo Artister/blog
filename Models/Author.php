@@ -2,8 +2,8 @@
 
 namespace Application\Models;
 
-use Artister\Entity\IEntity;
-use Artister\System\Collections\IList;
+use DevNet\Entity\IEntity;
+use DevNet\System\Collections\IList;
 
 class Author implements IEntity
 {

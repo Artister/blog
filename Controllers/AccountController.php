@@ -2,11 +2,11 @@
 
 namespace Application\Controllers;
 
-use Artister\Web\Mvc\Controller;
-use Artister\Web\Mvc\IActionResult;
-use Artister\Web\Mvc\Filters\AuthorizeFilter;
-use Artister\Web\Identity\IdentityManager;
-use Artister\Web\Identity\UserManager;
+use DevNet\Web\Mvc\Controller;
+use DevNet\Web\Mvc\IActionResult;
+use DevNet\Web\Mvc\Filters\AuthorizeFilter;
+use DevNet\Web\Identity\IdentityManager;
+use DevNet\Web\Identity\UserManager;
 use Application\Models\LoginForm;
 use Application\Models\RegisterForm;
 use Application\Models\User;

@@ -2,10 +2,10 @@
 
 namespace Application\Models;
 
-use Artister\Entity\EntityContext;
-use Artister\Entity\EntityModelBuilder;
-use Artister\Entity\EntityOptions;
-use Artister\Entity\EntitySet;
+use DevNet\Entity\EntityContext;
+use DevNet\Entity\EntityModelBuilder;
+use DevNet\Entity\EntityOptions;
+use DevNet\Entity\EntitySet;
 
 class DbManager extends EntityContext
 {

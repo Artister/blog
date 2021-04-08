@@ -2,7 +2,7 @@
 
 namespace Application\Models;
 
-use Artister\Web\Identity\User as IdentityUser;
+use DevNet\Web\Identity\User as IdentityUser;
 
 class User extends IdentityUser
 {

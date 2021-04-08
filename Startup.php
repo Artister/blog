@@ -2,12 +2,12 @@
 
 namespace Application;
 
-use Artister\System\Configuration\IConfiguration;
-use Artister\System\Dependency\IServiceCollection;
-use Artister\Web\Dispatcher\IApplicationBuilder;
-use Artister\Web\Extensions\ServiceCollectionExtensions;
-use Artister\Web\Extensions\ApplicationBuilderExtensions;
-use Artister\Entity\Providers\EntityOptionsExtensions;
+use DevNet\System\Configuration\IConfiguration;
+use DevNet\System\Dependency\IServiceCollection;
+use DevNet\Web\Dispatcher\IApplicationBuilder;
+use DevNet\Web\Extensions\ServiceCollectionExtensions;
+use DevNet\Web\Extensions\ApplicationBuilderExtensions;
+use DevNet\Entity\Providers\EntityOptionsExtensions;
 use Application\Models\DbManager;
 use Application\Models\User;
 

@@ -2,9 +2,9 @@
 
 namespace Application\Controllers;
 
-use Artister\Entity\EntityContext;
-use Artister\Web\Mvc\Controller;
-use Artister\Web\Mvc\IActionResult;
+use DevNet\Entity\EntityContext;
+use DevNet\Web\Mvc\Controller;
+use DevNet\Web\Mvc\IActionResult;
 
 class BlogController extends Controller
 {
