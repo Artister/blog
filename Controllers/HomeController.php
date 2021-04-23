@@ -24,6 +24,22 @@ class HomeController extends Controller
 
     public function error() : IActionResult
     {
-        return $this->view();
+        $error = new \Exception("Sorry! Looks like this page doesn't exist.", 404);
+        if($this->HttpContext->Error)
+        {
+            switch ($this->HttpContext->Error->getCode())
+            {
+                case 404:
+                    break;
+                case 403:
+                    $error = new \Exception("Sorry! Your request is not allowed.", 403);
+                    break;
+                default:
+                    $error = new \Exception("Woops! Looks like something went wrong.", 500);
+                    break;
+            }
+        }
+
+        return $this->view($error);
     }
 }
