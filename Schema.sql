@@ -26,6 +26,7 @@ CREATE TABLE blog.`Author` (
   `Occupation` varchar(45) DEFAULT NULL,
   `Location` varchar(45) DEFAULT NULL,
   `Description` text,
+  `Picture` varchar(45) DEFAULT NULL,
   `Phone` varchar(45) DEFAULT NULL,
   `Email` varchar(45) DEFAULT NULL,
   `Link` varchar(45) DEFAULT NULL,
