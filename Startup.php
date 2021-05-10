@@ -24,7 +24,10 @@ class Startup
     {
         $services->addMvc();
 
-        $services->addAuthentication();
+        $services->addAuthentication(function($options)
+        {
+            $options->LoginPath = '/private/account/login';
+        });
 
         $services->addAuthorisation();
 
@@ -48,6 +51,7 @@ class Startup
         
         $app->useEndpoint(function($routes)
         {
+            $routes->mapRoute("private", "private/{controller=Home}/{action=Index}/{id?}");
             $routes->mapRoute("default", "{controller=Home}/{action=Index}/{id?}");
         });
     }
