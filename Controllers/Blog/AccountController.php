@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Controllers\Private;
+namespace Application\Controllers\Blog;
 
 use DevNet\Web\Mvc\Controller;
 use DevNet\Web\Mvc\IActionResult;
@@ -37,7 +37,7 @@ class AccountController extends Controller
 
         if ($user->isAuthenticated())
         {
-            return $this->redirect('/private/account/index');
+            return $this->redirect('/blog/account');
         }
 
         if (!$form->isValide())
@@ -47,13 +47,13 @@ class AccountController extends Controller
 
         $this->Identity->signIn($form->Username, $form->Password, $form->Remember);
 
-        return $this->redirect('/private/account/index');
+        return $this->redirect('/blog/account');
     }
 
     public function logout() : IActionResult
     {
         $this->Identity->signOut();
-        return $this->redirect('/private/account/login');
+        return $this->redirect('/blog/account/login');
     }
 
     public function register(RegisterForm $form) : IActionResult

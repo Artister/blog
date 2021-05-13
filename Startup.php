@@ -26,7 +26,7 @@ class Startup
 
         $services->addAuthentication(function($options)
         {
-            $options->LoginPath = '/private/account/login';
+            $options->LoginPath = '/blog/account/login';
         });
 
         $services->addAuthorisation();
@@ -51,7 +51,7 @@ class Startup
         
         $app->useEndpoint(function($routes)
         {
-            $routes->mapRoute("private", "private/{controller=Home}/{action=Index}/{id?}");
+            $routes->mapRoute("blog", "blog/{controller=Home}/{action=Index}/{id?}");
             $routes->mapRoute("default", "{controller=Home}/{action=Index}/{id?}");
         });
     }
