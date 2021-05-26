@@ -18,16 +18,6 @@ class HomeController extends Controller
         return $this->view();
     }
 
-    public function blog() : IActionResult
-    {
-        return $this->view();
-    }
-
-    public function post() : IActionResult
-    {
-        return $this->view();
-    }
-
     public function about() : IActionResult
     {
         return $this->view();
