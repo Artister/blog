@@ -5,6 +5,7 @@ namespace Application\Controllers;
 use DevNet\Entity\EntityContext;
 use DevNet\Web\Mvc\Controller;
 use DevNet\Web\Mvc\IActionResult;
+use Application\Models\ContactForm;
 
 class HomeController extends Controller
 {
@@ -23,9 +24,35 @@ class HomeController extends Controller
         return $this->view();
     }
 
-    public function contact() : IActionResult
+    public function contact(ContactForm $form) : IActionResult
     {
-        return $this->view();
+        if (!$form->isValide())
+        {
+            return $this->view();
+        }
+
+        $headers = "From: noreply@yourdomain.com\n";
+        $headers .= "Reply-To: {$form->Email}";
+        $to = 'yourname@yourdomain.com';
+        $subject = "Website Contact Form:  {$form->Subject}";
+        $message = "You have received a new message from your website contact form\n";
+        $message .= "Here are the details:\n";
+        $message .= "Name: {$form->Name}\n";
+        $message .= "Email: {$form->Email}\n";
+        $message .= "Message: {$form->Message}";
+   
+        $success = mail($to, $subject, $message, $headers);
+
+        if ($success)
+        {
+            $this->ViewData['response'] = "your message has been sent successfully";
+        }
+        else
+        {
+            $this->ViewData['response'] = "Sorry your message wasn't delivered!";
+        }
+
+        return $this->content("You message has been sent.");
     }
 
     public function error() : IActionResult
