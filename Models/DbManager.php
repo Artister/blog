@@ -30,6 +30,9 @@ class DbManager extends EntityContext
 
    public function onModelCreate(EntityModelBuilder $builder)
    {
+      $builder->entity(User::class)
+      ->hasOne('Author', Author::class);
+
       $builder->entity(Author::class)
       ->hasForeignKey('UserId', User::class)
       ->hasOne('User', User::class)
