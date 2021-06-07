@@ -23,6 +23,8 @@ class Startup
     public function configureServices(IServiceCollection $services)
     {
         $services->addMvc();
+        
+        $services->addAntiforgery();
 
         $services->addAuthentication(function($options)
         {
