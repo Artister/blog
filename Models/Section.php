@@ -10,7 +10,7 @@ class Section implements IEntity
     private int $Id;
     private string $Title;
     private string $Slug;
-    private string $Image;
+    private ?string $Image;
     private string $Description;
 
     // navigation properties

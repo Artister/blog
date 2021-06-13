@@ -12,6 +12,7 @@ use DevNet\System\Collections\ArrayList;
 use DevNet\Web\Identity\UserManager;
 use DevNet\Web\Mvc\Controller;
 use DevNet\Web\Mvc\IActionResult;
+use DevNet\System\Linq;
 use Faker;
 
 class SeederController extends Controller
@@ -121,6 +122,7 @@ class SeederController extends Controller
         return $this->content(count($this->DbManager->Sections->toArray()) . " Sections faked ...");
     }
     // we add some faked posts
+
     public function fake_posts(): IActionResult
     {
         // this code is used to create a fake data
@@ -179,6 +181,7 @@ class SeederController extends Controller
         $this->fake_sections();
         $this->fake_posts();
         $this->fake_comments();
+        return $this->content("Database seeded.");
     }
 
     function randomDate($start_date, $end_date)

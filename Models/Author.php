@@ -10,7 +10,7 @@ class Author implements IEntity
     private int $Id;
     private int $UserId;
     private string $Name;
-    private string $Gender;
+    private ?string $Gender;
     private ?string $Occupation;
     private ?string $Location;
     private ?string $Picture;
