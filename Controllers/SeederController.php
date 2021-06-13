@@ -171,6 +171,16 @@ class SeederController extends Controller
         return $this->content(count($this->DbManager->Comments->toArray()) . " comments faked");
     }
 
+    public function global_feed(): IActionResult
+    {
+        // this code is used to create a fake data
+        $this->create_admin();
+        $this->fake_users();
+        $this->fake_sections();
+        $this->fake_posts();
+        $this->fake_comments();
+    }
+
     function randomDate($start_date, $end_date)
     {
         // Convert to timetamps

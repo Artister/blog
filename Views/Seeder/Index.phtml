@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <title>Database data</title>
+</head>
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h2 style="text-align: center;margin:20px;">Database seeding (Developpment mode only)</h2>
+        <div class="row">
+            <h5>Choose the tables to feed with faked data</h5>
+            <ul>
+                <li>Feeding the Admin user <span><a href="/seeder/create_admin">Feed</a></span></li>
+                <li>Feeding the Users and authors <span><a href="/seeder/fake_users">Feed</a></span></li>
+                <li>Feeding the Sections <span><a href="/seeder/fake_sections">Feed</a></span></li>
+                <li>Feeding the Posts <span><a href="fake_posts">Feed</a></span></li>
+                <li>Feeding the Comments <span><a href="fake_comments">Feed</a></span></li>
+            </ul>
+            <br>
+            <h5>OR</h5>
+            <p>Make the global feed for all the tables <span><a href="global_feed">Global Feed</a></span>
+            </p>
+        </div>
+
+    </div>
+</body>
+
+</html>
