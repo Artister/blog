@@ -2,10 +2,15 @@
 
 namespace Application\Controllers;
 
+use Application\Models\Author;
+use Application\Models\Post;
+use Application\Models\User;
 use DevNet\Entity\EntityContext;
+use DevNet\System\Collections\ArrayList;
 use DevNet\Web\Identity\UserManager;
 use DevNet\Web\Mvc\Controller;
 use DevNet\Web\Mvc\IActionResult;
+use Faker;
 
 class SeederController extends Controller
 {
@@ -91,15 +96,71 @@ class SeederController extends Controller
             $this->DbManager->Authors->add($author);
         }
         $this->DbManager->save();
-
         $authors = $this->DbManager->Authors;
-        //var_dump($authors->toArray());
         return $this->content(count($authors->toArray()) . " Users and Authors faked");
     }
-
-    public function index(): IActionResult
+    //we create somme sections
+    public function fake_sections(): IActionResult
     {
-        return $this->view();
+        // this code is used to create a fake data
+        $faker = Faker\Factory::create();
+
+        // sections
+        $sectitles = ["News", "Events", "Trending", "Medecine", "Technology", "Sports"];
+        for ($j = 0; $j < count($sectitles); $j++) {
+            $section = new Section();
+            $section->Title = $sectitles[$j];
+            $section->Slug = $section->Title;
+            $section->Image = "";
+            $section->Description = $faker->text(100);
+            $this->DbManager->Sections->add($section);
+        }
+        $this->DbManager->save();
+        return $this->content(count($this->DbManager->Sections->toArray()) . " Sections faked ...");
+    }
+    // we add some faked posts
+    public function fake_posts(): IActionResult
+    {
+        // this code is used to create a fake data
+        $faker = Faker\Factory::create();
+
+        // for each section multiple posts
+        $sections = $this->DbManager->Sections->toArray();
+
+        $posts = $this->DbManager->Posts;
+        // loop to create fake data
+
+        for ($j = 0; $j < count($sections); $j++) {
+            // for each section create a random number of posts
+            for ($i = 0; $i < mt_rand(1, 10); $i++) {
+                $post = new Post();
+                $post->SectionId = $sections[$j]->Id;
+                $post->AuthorId = mt_rand(1, 3);
+                $post->Title = $faker->text(40);
+                $post->Slug = $post->Title;
+                $post->Excerpt = $faker->text(50);
+                $post->Content = $faker->text(200);
+                $post->Image = "https://picsum.photos/200/300";
+                $post->EditedAt = $this->randomDate('2021-01-01', '2021-06-10');
+                $this->DbManager->Posts->add($post);
+            }
+            $this->DbManager->save();
+        }
+        return $this->content(count($this->DbManager->Posts->toArray()) . " posts faked ...");
+    }
+
+
+    function randomDate($start_date, $end_date)
+    {
+        // Convert to timetamps
+        $min = strtotime($start_date);
+        $max = strtotime($end_date);
+
+        // Generate random number using above bounds
+        $val = rand($min, $max);
+
+        // Convert back to desired date format
+        return Date('Y-m-d H:m:s', $val);
     }
 
     public function post(): IActionResult
