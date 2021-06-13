@@ -3,7 +3,9 @@
 namespace Application\Controllers;
 
 use Application\Models\Author;
+use Application\Models\Comment;
 use Application\Models\Post;
+use Application\Models\Section;
 use Application\Models\User;
 use DevNet\Entity\EntityContext;
 use DevNet\System\Collections\ArrayList;
@@ -25,7 +27,7 @@ class SeederController extends Controller
 
     public function index(): IActionResult
     {
-        return $this->content("Hi i am a seeder...");
+        return $this->view();
     }
     // We create the admin user and its profile
     public function create_admin(): IActionResult
@@ -149,6 +151,25 @@ class SeederController extends Controller
         return $this->content(count($this->DbManager->Posts->toArray()) . " posts faked ...");
     }
 
+    public function fake_comments(): IActionResult
+    {
+        // this code is used to create a fake data
+        $faker = Faker\Factory::create();
+
+        // for each post make several comments
+        $posts = $this->DbManager->Posts->toArray();
+        for ($j = 0; $j < count($posts); $j++) {
+            for ($i = 0; $i < mt_rand(1, 6); $i++) {
+                $comment = new Comment();
+                $comment->PostId = $posts[$j]->Id;
+                $comment->AuthorId = mt_rand(1, 20);
+                $comment->Content = $faker->text(200);;
+                $this->DbManager->Comments->add($comment);
+            }
+        }
+        $this->DbManager->save();
+        return $this->content(count($this->DbManager->Comments->toArray()) . " comments faked");
+    }
 
     function randomDate($start_date, $end_date)
     {
@@ -161,10 +182,5 @@ class SeederController extends Controller
 
         // Convert back to desired date format
         return Date('Y-m-d H:m:s', $val);
-    }
-
-    public function post(): IActionResult
-    {
-        return $this->view();
     }
 }
