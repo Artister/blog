@@ -16,7 +16,7 @@ class Post implements IEntity
     private string $Excerpt;
     private string $Image;
     private string $Content;
-    private DateTime $EditedAt;
+    private string $EditedAt;
 
     // navigation properties
     private Author $Author;

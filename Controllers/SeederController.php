@@ -165,7 +165,8 @@ class SeederController extends Controller
                 $comment = new Comment();
                 $comment->PostId = $posts[$j]->Id;
                 $comment->AuthorId = mt_rand(1, 20);
-                $comment->Content = $faker->text(200);;
+                $comment->Content = $faker->text(200);
+                $comment->EditedAt = Date('Y-m-d H:m:s');
                 $this->DbManager->Comments->add($comment);
             }
         }

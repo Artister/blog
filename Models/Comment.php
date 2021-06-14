@@ -11,7 +11,7 @@ class Comment implements IEntity
     private int $PostId;
     private int $AuthorId;
     private string $Content;
-    private DateTime $EditedAt;
+    private ?string $EditedAt;
 
     // navigation properties
     private Post $Post;

@@ -23,19 +23,17 @@ class Startup
     public function configureServices(IServiceCollection $services)
     {
         $services->addMvc();
-        
+
         $services->addAntiforgery();
 
-        $services->addAuthentication(function($options)
-        {
+        $services->addAuthentication(function ($options) {
             $options->LoginPath = '/user/account/login';
         });
 
         $services->addAuthorisation();
 
-        $services->addEntityContext(DbManager::class, function($options)
-        {
-            $options->useMysql("//root:root@127.0.0.1/blog");
+        $services->addEntityContext(DbManager::class, function ($options) {
+            $options->useMysql("//root:root@127.0.0.1/blog1");
         });
 
         $services->addIdentity(User::class);
@@ -48,11 +46,10 @@ class Startup
         $app->useRouter();
 
         $app->useAuthentication();
-        
+
         $app->useAuthorization();
-        
-        $app->useEndpoint(function($routes)
-        {
+
+        $app->useEndpoint(function ($routes) {
             $routes->mapRoute("user", "user/{controller=Home}/{action=Index}/{id?}");
             $routes->mapRoute("default", "{controller=Home}/{action=Index}/{id?}");
         });
