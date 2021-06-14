@@ -33,7 +33,7 @@ class Startup
         $services->addAuthorisation();
 
         $services->addEntityContext(DbManager::class, function ($options) {
-            $options->useMysql("//root:root@127.0.0.1/blog1");
+            $options->useMysql("//root:root@127.0.0.1/blog");
         });
 
         $services->addIdentity(User::class);
