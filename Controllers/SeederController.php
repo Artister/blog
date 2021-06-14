@@ -144,6 +144,7 @@ class SeederController extends Controller
                 $post->Slug = $post->Title;
                 $post->Excerpt = $faker->text(50);
                 $post->Content = $faker->text(200);
+                $post->Featured = 1;
                 $post->Image = "https://picsum.photos/200/300";
                 $post->EditedAt = $this->randomDate('2021-01-01', '2021-06-10');
                 $this->DbManager->Posts->add($post);
