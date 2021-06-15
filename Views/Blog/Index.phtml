@@ -8,74 +8,106 @@
    <br><br>
    <div class="row">
       <div class="col-md-8">
-         <a class="text-decoration-none text-dark" href="/blog/post">
-            <div class="card mb-3 shadow-sm">
-               <div class="row g-0">
-                  <div class="col-md-5">
-                     <img class="img-fluid w-100 h-100" src="https://picsum.photos/id/365/300/200" alt="...">
-                  </div>
-                  <div class="col-md-7">
-                     <div class="card-body">
-                        <h5 class="card-title">Post title</h5>
-                        <p class="card-text">
-                           <small class="text-muted">On February 23, 2019 | By john doe</small>
-                        </p>
-                        <p class="card-text">
-                           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores iure, delectus minus facere similique laudantium praesentium! Neque eligendi consectetur quo repellendus ipsam sapiente mollitia optio quas pariatur perferendis. Hic, optio!
-                        </p>
+         <?php foreach ($this->ViewData['posts'] as $post) : ?>
+            <a class="text-decoration-none text-dark" href="/blog/post/<?= $post->Id ?>">
+               <div class="card mb-3 shadow-sm">
+                  <div class="row g-0">
+                     <div class="col-md-5">
+                        <img class="img-fluid w-100 h-100" src="https://picsum.photos/id/365/300/200" alt="...">
+                     </div>
+                     <div class="col-md-7">
+                        <div class="card-body">
+                           <h5 class="card-title"><?= $post->Title ?></h5>
+                           <p class="card-text">
+                              <small class="text-muted">On February 23, 2019 | By john doe</small>
+                           </p>
+                           <p class="card-text">
+                              <?= $post->Excerpt ?>
+                           </p>
+                        </div>
                      </div>
                   </div>
                </div>
-            </div>
-         </a>
-         <a class="text-decoration-none text-dark" href="/blog/post">
-            <div class="card mb-3 shadow-sm">
-               <div class="row g-0">
-                  <div class="col-md-5">
-                     <img class="img-fluid w-100 h-100" src="https://picsum.photos/id/401/300/200" alt="...">
-                  </div>
-                  <div class="col-md-7">
-                     <div class="card-body">
-                        <h5 class="card-title">Post title</h5>
-                        <p class="card-text">
-                           <small class="text-muted">On February 23, 2019 | By john doe</small>
-                        </p>
-                        <p class="card-text">
-                           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae, enim. Magnam veritatis, aut tenetur pariatur dignissimos neque. Praesentium temporibus, vitae provident id esse, corporis dolorum sapiente impedit culpa eum fuga.
-                        </p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </a>
-         <a class="text-decoration-none text-dark" href="/blog/post">
-            <div class="card mb-3 shadow-sm">
-               <div class="row g-0">
-                  <div class="col-md-5">
-                     <img class="img-fluid w-100 h-100" src="https://picsum.photos/id/425/300/200" alt="...">
-                  </div>
-                  <div class="col-md-7">
-                     <div class="card-body">
-                        <h5 class="card-title">Post title</h5>
-                        <p class="card-text">
-                           <small class="text-muted">On February 23, 2019 | By john doe</small>
-                        </p>
-                        <p class="card-text">
-                           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel deserunt debitis possimus. Recusandae, soluta officia. Pariatur similique quasi fugiat quis nam quam esse inventore praesentium soluta, nihil, suscipit cum aperiam!
-                        </p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </a>
+            </a>
+         <?php endforeach ?>
          <nav class="blog-pagination" aria-label="Pagination">
-            <a class="btn btn-outline-primary" href="#">Older</a>
-            <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+            <a class="btn btn-outline-primary" href='/blog/page/<?= $this->ViewData['page'] + 1 ?>'>Older</a>
+            <a class="btn btn-outline-secondary" href='/blog/page/<?= $this->ViewData['page'] - 1 ?>' tabindex="-1" aria-disabled="true">Newer</a>
          </nav>
          <br>
+
       </div>
       <div class="col-md-4">
-         <?= $this->renderPartial('Shared/SideBar') ?>
+         <aside class="px-3 pb-3">
+            <form action="#">
+               <div class="input-group">
+                  <input class="form-control" type="search" placeholder="Enter your email address" aria-label="email address" aria-describedby="button-addon2">
+                  <div class="input-group-append ml-2">
+                     <button class="btn btn-danger" id="button-addon2" type="submit">Subscribe</button>
+                  </div>
+               </div>
+            </form>
+         </aside>
+         <aside class="p-3">
+            <h6 class="text-uppercase mb-1 text-muted">
+               Follow Us
+            </h6>
+            <ul class="nav flex-column mb-2">
+               <li class="nav-item">
+                  <a class="nav-link text-dark border-bottom" href="#">
+                     <i class="bi bi-facebook fs-5 lh-1"></i>
+                     Facebook
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link text-dark border-bottom" href="#">
+                     <i class="bi bi-twitter fs-5 lh-1"></i>
+                     Twitter
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link text-dark border-bottom" href="#">
+                     <i class="bi bi-youtube fs-5 lh-1"></i>
+                     Youtube
+                  </a>
+               </li>
+            </ul>
+         </aside>
+         <aside class="p-3">
+            <h6 class="text-uppercase mb-1 text-muted">
+               Sections
+            </h6>
+            <ul class="nav flex-column mb-2">
+               <?php foreach ($this->ViewData['sections'] as $section) : ?>
+                  <li class="nav-item">
+                     <a class="nav-link text-dark border-bottom" href="/home/section/<?= $section->Id ?>">
+                        <i class="bi bi-folder2-open lh-1"></i>
+                        <?= $section->Title ?>
+                     </a>
+                  </li>
+               <?php endforeach ?>
+            </ul>
+         </aside>
+         <aside class="p-3">
+            <h6 class="text-uppercase mb-2 text-muted">
+               All Recent Comments
+            </h6>
+            <ul class="nav flex-column mb-2">
+               <?php foreach ($this->ViewData['comments'] as $comment) : ?>
+                  <!-----  <h6><= $comment->Author->Name ?></h6>  ---->
+                  <div class="row fs-6 lh-sm">
+                     <p class="fs-6 lh-sm">
+                        <span><small> <b><?= $comment->EditedAt ?></b></small></span>
+                        <br>
+                        <i class="bi bi-chat-left-text"></i>
+                        <small><?= $comment->Content ?></small>
+                        <br>
+                        <small><a href="">Read more</a></small>
+                     </p>
+                  </div>
+               <?php endforeach ?>
+            </ul>
+         </aside>
       </div>
    </div>
 </div>

@@ -6,6 +6,8 @@ namespace Application\Controllers;
 // use Application\Models\Comment;
 // use Application\Models\Post;
 // use Application\Models\Section;
+
+use Application\Models\ContactForm;
 use DevNet\Entity\EntityContext;
 use DevNet\Entity\EntitySet;
 use DevNet\Web\Mvc\Controller;
@@ -113,25 +115,6 @@ class HomeController extends Controller
         return $this->view();
     }
 
-    public function post(int $id): IActionResult
-    {
-        $sections = $this->DbManager->Sections;
-        $this->ViewData['sections'] = $sections->toArray();
-
-        $comments = $this->DbManager->Comments->orderByDescending(fn ($c) => $c->Id);
-        $offset = count($comments->toArray());
-        //$this->ViewData['comments'] = $comments->orderByDescending(fn ($c) => $c->Id)->take(6);
-        // ($offset > 6 ? $this->ViewData['comments'] = $comments->skip($offset - 6)->take(6)->toArray()
-        //     : $this->ViewData['comments'] = $comments->toArray());
-        ($offset > 6 ? $this->ViewData['comments'] = $comments->take(6)->toArray()
-            : $this->ViewData['comments'] = $comments->toArray());
-        $post = $this->DbManager->Posts->find($id);
-
-        if (!$post) {
-            return $this->redirect("home/error");
-        }
-        return $this->view($post);
-    }
     public function contact(ContactForm $form): IActionResult
     {
         if (!$form->isValide()) {
