@@ -50,7 +50,8 @@ class Startup
         $app->useAuthorization();
 
         $app->useEndpoint(function ($routes) {
-            $routes->mapRoute("user", "user/{controller=Home}/{action=Index}/{id?}");
+            //$routes->mapRoute("blog", "blog/{controller=Blog}/{action=Index}/{id?}");
+            $routes->mapRoute("user", "user/{controller=User}/{action=Index}/{id?}");
             $routes->mapRoute("default", "{controller=Home}/{action=Index}/{id?}");
         });
     }

@@ -55,6 +55,7 @@ class BlogController extends Controller
         $this->ViewData['comments'] = $comments->orderByDescending(fn ($c) => $c->Id)->take(6);
         return $this->View();
     }
+
     public function post(int $id): IActionResult
     {
         $sections = $this->DbManager->Sections;
@@ -72,6 +73,7 @@ class BlogController extends Controller
         if (!$post) {
             return $this->redirect("home/error");
         }
-        return $this->view($post);
+        return $this->view("Blog/Post", $post);
+        //return $this->view($post);
     }
 }
