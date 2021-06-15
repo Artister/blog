@@ -13,7 +13,7 @@ class Author implements IEntity
     private ?string $Gender;
     private ?string $Occupation;
     private ?string $Location;
-    private ?string $Picture;
+    private ?string $Photo;
     private ?string $Description;
     private ?string $Email;
     private ?string $Phone;
