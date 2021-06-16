@@ -130,10 +130,10 @@ class SeederController extends Controller
 
         // for each section multiple posts
         $sections = $this->DbManager->Sections->toArray();
-
+        // posts pictures
+        $pics = ["pic1", "pic2", "pic3", "pic4", "pic5", "pic6", "pic7", "pic8", "pic9", "pic10"];
         $posts = $this->DbManager->Posts;
         // loop to create fake data
-
         for ($j = 0; $j < count($sections); $j++) {
             // for each section create a random number of posts
             for ($i = 0; $i < mt_rand(1, 10); $i++) {
@@ -145,7 +145,7 @@ class SeederController extends Controller
                 $post->Excerpt = $faker->text(50);
                 $post->Content = $faker->text(200);
                 $post->Featured = 1;
-                $post->Image = "https://picsum.photos/200/300";
+                $post->Image = $pics[mt_rand(0, 9)] . ".png";
                 $post->EditedAt = $this->randomDate('2021-01-01', '2021-06-10');
                 $this->DbManager->Posts->add($post);
             }
