@@ -1,0 +1,112 @@
+<?= $this->layout('Shared/Layout') ?>
+
+<div class="container-fluid" style="background-color: #f0f4f7;">
+	<div class="row">
+      <aside class="bg-white" style="width: 250px;">
+         <?= $this->renderPartial('Shared/UserSidebar') ?>
+      </aside>
+		<div class="d-flex flex-grow-1 flex-column px-5 py-4" style="min-height: 400px; width: 400px">
+         <header class="my-3">
+            <h3 class="text-uppercase">Articles</h3>
+         </header>
+         <section>
+            <div class="row mb-3">
+               <div class="col-md">
+                  <a class="btn btn-primary" href="/user/posts/new"><i class="bi bi-plus-lg"></i> New Article</a>
+                  <a class="btn btn-outline-secondary border-0" href="/user/posts/delete"><i class="bi bi-trash"> </i>Delete</a>
+                  <a class="btn btn-outline-secondary border-0" href="/user/posts/archive"><i class="bi bi-archive"></i> </i>Archive</a>
+               </div>
+               <div class="col-md">
+                  <input class="form-control ms-auto" type="text" placeholder="Search" style="width: 260px;">
+               </div>
+            </div>
+            <div class="card px-3">
+               <div class="card-body">
+                  <table id="PostList" class="table">
+                     <thead>
+                        <tr class="row">
+                           <th scope="col" class="col-sm-1"><span class="form-check"><input type="checkbox" id="Checker" class="form-check-input"></span></th>
+                           <th scope="col" class="col-sm-4">Title</th>
+                           <th scope="col" class="col-sm-3">Section</th>
+                           <th scope="col" class="col-sm-2">Status</th>
+                           <th scope="col" class="col-sm-2">Date</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr class="row">
+                           <td class="col-sm-1"><span class="form-check"><input type="checkbox" name="Action1" class="form-check-input"></span></td>
+                           <td class="col-sm-4">Simple Post</td>
+                           <td class="col-sm-3">Technology</td>
+                           <td class="col-sm-2">Draft</td>
+                           <td class="col-sm-2">2021-12-23</td>
+                        </tr>
+                        <tr class="row">
+                           <td class="col-sm-1"><span class="form-check"><input type="checkbox" name="Action2" class="form-check-input"></span></td>
+                           <td class="col-sm-4">My Article</td>
+                           <td class="col-sm-3">News</td>
+                           <td class="col-sm-2">Pending</td>
+                           <td class="col-sm-2">2021-11-16</td>
+                        </tr>
+                        <tr class="row">
+                           <td class="col-sm-1"><span class="form-check"><input type="checkbox" name="Action3" class="form-check-input"></span></td>
+                           <td class="col-sm-4">New Events</td>
+                           <td class="col-sm-3">Event</td>
+                           <td class="col-sm-2">Published</td>
+                           <td class="col-sm-2">2021-11-05</td>
+                        </tr>
+                        <tr class="row">
+                           <td class="col-sm-1"><span class="form-check"><input type="checkbox" name="Action4" class="form-check-input"></span></td>
+                           <td class="col-sm-4">Try our product</td>
+                           <td class="col-sm-3">Entertinement</td>
+                           <td class="col-sm-2">Published</td>
+                           <td class="col-sm-2">2021-10-26</td>
+                        </tr>
+                        <tr class="row">
+                           <td class="col-sm-1"><span class="form-check"><input type="checkbox" name="Action5" class="form-check-input"></span></td>
+                           <td class="col-sm-4">Thornton</td>
+                           <td class="col-sm-3">Sport</td>
+                           <td class="col-sm-2">Archived</td>
+                           <td class="col-sm-2">2021-10-21</td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <nav aria-label="Page navigation example">
+                     <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                           <a class="page-link" href="#" aria-label="Previous">
+                              <i class="bi bi-chevron-left"></i>
+                           </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                           <a class="page-link" href="#" aria-label="Next">
+                              <i class="bi bi-chevron-right"></i>
+                           </a>
+                        </li>
+                     </ul>
+                  </nav>
+               </div>
+            </div>
+         </section>
+		</div>
+	</div>
+</div>
+
+<script>
+
+   function checkAll()
+   {
+      var table = document.getElementById('PostList');
+      var val = table.rows[0].cells[0].children[0].children[0].checked;
+      for (var i = 1; i < table.rows.length; i++)
+      {
+            table.rows[i].cells[0].children[0].children[0].checked = val;
+      }
+   }
+
+   var checkBox = document.getElementById("Checker");
+   checkBox.onclick = checkAll;
+
+</script>

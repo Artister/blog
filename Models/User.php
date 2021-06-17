@@ -16,6 +16,11 @@ class User extends IdentityUser
 
     public function __set(string $name, $value)
     {
+        if (!property_exists($this, $name))
+        {
+            throw new \Exception("The property {$name} doesn't exist.");
+        }
+        
         $this->$name = $value;
     }
 }
