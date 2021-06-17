@@ -127,6 +127,11 @@ class SeederController extends Controller
     {
         // this code is used to create a fake data
         $faker = Faker\Factory::create();
+        $authors = $this->DbManager->Authors->toArray();
+        $authorsId = [];
+        foreach ($authors as $author) {
+            $authorsId[] = $author->Id;
+        }
 
         // for each section multiple posts
         $sections = $this->DbManager->Sections->toArray();
@@ -139,18 +144,18 @@ class SeederController extends Controller
             for ($i = 0; $i < mt_rand(1, 10); $i++) {
                 $post = new Post();
                 $post->SectionId = $sections[$j]->Id;
-                $post->AuthorId = mt_rand(1, 3);
+                $post->AuthorId = $authorsId[array_rand($authorsId, 1)];
                 $post->Title = $faker->text(40);
                 $post->Slug = $post->Title;
                 $post->Excerpt = $faker->text(50);
                 $post->Content = $faker->text(200);
-                $post->Featured = 1;
+                $post->Featured = '1';
                 $post->Image = $pics[mt_rand(0, 9)] . ".png";
                 $post->EditedAt = $this->randomDate('2021-01-01', '2021-06-10');
                 $this->DbManager->Posts->add($post);
             }
-            $this->DbManager->save();
         }
+        $this->DbManager->save();
         return $this->content(count($this->DbManager->Posts->toArray()) . " posts faked ...");
     }
 
@@ -158,14 +163,18 @@ class SeederController extends Controller
     {
         // this code is used to create a fake data
         $faker = Faker\Factory::create();
-
+        $authors = $this->DbManager->Authors->toArray();
+        $authorsId = [];
+        foreach ($authors as $author) {
+            $authorsId[] = $author->Id;
+        }
         // for each post make several comments
         $posts = $this->DbManager->Posts->toArray();
         for ($j = 0; $j < count($posts); $j++) {
             for ($i = 0; $i < mt_rand(1, 6); $i++) {
                 $comment = new Comment();
                 $comment->PostId = $posts[$j]->Id;
-                $comment->AuthorId = mt_rand(1, 20);
+                $comment->AuthorId = $authorsId[array_rand($authorsId, 1)];
                 $comment->Content = $faker->text(200);
                 $comment->EditedAt = Date('Y-m-d H:m:s');
                 $this->DbManager->Comments->add($comment);
@@ -186,7 +195,7 @@ class SeederController extends Controller
         return $this->content("Database seeded.");
     }
 
-    function randomDate($start_date, $end_date)
+    function randomDate($start_date, $end_date): string
     {
         // Convert to timetamps
         $min = strtotime($start_date);
