@@ -48,7 +48,7 @@
                         <?= $section->Description ?>
                      </p>
                   </div>
-                  <a class="btn btn-danger text-white mx-auto mb-4" href="/home/section/<?= $section->Id ?>">
+                  <a class="btn btn-danger text-white mx-auto mb-4" href="/blog/section/<?= $section->Id ?>">
                      View Blogs</a>
                </div>
             </div>
@@ -72,7 +72,7 @@
                <?php else : ?> <div class="carousel-item">
                   <?php endif ?>
                   <div class="card mb-3 border-0" style="background-color: #f8f9fa;">
-                     <a class="text-decoration-none text-dark" href="/home/post/<?= $this->ViewData['featured'][$i]->Id ?>">
+                     <a class="text-decoration-none text-dark" href="/blog/post/<?= $this->ViewData['featured'][$i]->Id ?>">
                         <div class="row g-0">
                            <div class="col-md-6">
                               <img class="img-fluid w-100 h-100" src="/images/post/<?= $this->ViewData['featured'][$i]->Image ?>" alt="...">
@@ -114,7 +114,7 @@
          <div class="row row-cols-1 row-cols-md-3 g-4">
             <?php foreach ($this->ViewData['recents'] as $recent) : ?>
                <div class="col">
-                  <a class="text-decoration-none text-dark" href="/home/post/<?= $recent->Id ?>">
+                  <a class="text-decoration-none text-dark" href="/blog/post/<?= $recent->Id ?>">
                      <div class="card h-100">
                         <img class="img-fluid" src="/images/post/<?= $recent->Image ?>" alt="...">
                         <div class="card-body">

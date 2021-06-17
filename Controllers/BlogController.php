@@ -32,19 +32,40 @@ class BlogController extends Controller
         return $this->view();
     }
 
+    public function section(int $id): IActionResult
+    {
+        $sections = $this->DbManager->Sections;
+        $this->ViewData['sections'] = $sections->toArray();
+
+        $comments = $this->DbManager->Comments;
+        $offset = count($comments->toArray());
+        ($offset > 6 ? $this->ViewData['comments'] = $comments->skip($offset - 6)->take(6)->toArray()
+            : $this->ViewData['comments'] = $comments->toArray());
+
+        $this->ViewData['page'] = 1;
+
+        $section = $sections->find($id);
+        if (!$section) {
+            return $this->redirect("home/error");
+        }
+
+        $posts = $this->DbManager->Posts->where(fn ($post) => $post->SectionId == $id)
+            ->take(5)->toArray();
+        $this->ViewData['posts'] = $posts;
+        // give the view the section
+        $this->ViewData['section'] = $section;
+
+        return $this->view();
+    }
+
     public function page($id): IActionResult
     {
-        # code...
-        //  resultat = skip((pageNumber - 1) * limit)->take(limit)
-
         $posts = $this->DbManager->Posts;
         if ($id < 1) {
             return $this->redirect("home/error");
         }
         $limit = 5;
         $offset = ($id - 1) * $limit;
-        //$result = $posts->skip($offset)->take(2)->toArray();
-
         $sections = $this->DbManager->Sections;
         $this->ViewData['sections'] = $sections->toArray();
         $this->ViewData['posts'] = $posts->skip($offset)->take($limit)->toArray();
@@ -63,9 +84,7 @@ class BlogController extends Controller
 
         $comments = $this->DbManager->Comments->orderByDescending(fn ($c) => $c->Id);
         $offset = count($comments->toArray());
-        //$this->ViewData['comments'] = $comments->orderByDescending(fn ($c) => $c->Id)->take(6);
-        // ($offset > 6 ? $this->ViewData['comments'] = $comments->skip($offset - 6)->take(6)->toArray()
-        //     : $this->ViewData['comments'] = $comments->toArray());
+
         ($offset > 6 ? $this->ViewData['comments'] = $comments->take(6)->toArray()
             : $this->ViewData['comments'] = $comments->toArray());
         $post = $this->DbManager->Posts->find($id);
@@ -74,6 +93,5 @@ class BlogController extends Controller
             return $this->redirect("home/error");
         }
         return $this->view("Blog/Post", $post);
-        //return $this->view($post);
     }
 }
