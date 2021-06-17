@@ -56,7 +56,7 @@ class SeederController extends Controller
         $author->Occupation = $faker->text(50);
         $author->Gender = $faker->text(20);
         $author->Phone = $faker->phoneNumber();
-        $author->Photo = "/images/author/admin.png";
+        $author->Picture = "/images/author/admin.png";
         $this->DbManager->Authors->add($author);
 
         $this->DbManager->save();
@@ -95,7 +95,8 @@ class SeederController extends Controller
             $author->Occupation = $faker->text(50);
             $author->Gender = $faker->text(20);
             $author->Phone = $faker->phoneNumber();
-            $author->Photo = "/images/author/" . $avatars[mt_rand(0, 6)] . "png";
+            $author->Picture
+                = "/images/author/" . $avatars[mt_rand(0, 6)] . ".png";
             $this->DbManager->Authors->add($author);
         }
         $this->DbManager->save();

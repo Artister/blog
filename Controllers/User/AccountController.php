@@ -87,7 +87,7 @@ class AccountController extends Controller
         $author->Phone = "9999999999";
         $author->Email =  $form->Email;
         $author->Link = "My link";
-        $author->Photo = "avatar1.png";
+        $author->Pictute = "avatar1.png";
         $this->DbManager->Authors->add($author);
         $this->DbManager->save();
 

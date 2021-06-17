@@ -13,7 +13,7 @@ class Author implements IEntity
     private ?string $Gender;
     private ?string $Occupation;
     private ?string $Location;
-    private ?string $Photo;
+    private ?string $Picture;
     private ?string $Description;
     private ?string $Email;
     private ?string $Phone;
@@ -30,8 +30,7 @@ class Author implements IEntity
 
     public function __set(string $name, $value)
     {
-        if (!property_exists($this, $name))
-        {
+        if (!property_exists($this, $name)) {
             throw new \Exception("The property {$name} doesn't exist.");
         }
 
