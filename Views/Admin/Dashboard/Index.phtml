@@ -1,0 +1,166 @@
+<?= $this->layout('Shared/Layout') ?>
+
+<div class="container-fluid" style="background-color: #f0f4f7;">
+	<div class="row">
+      <aside class="bg-white" style="width: 250px;">
+         <?= $this->renderPartial('Shared/AdminSidebar') ?>
+      </aside>
+		<div class="d-flex flex-grow-1 flex-column px-5 py-4" style="min-height: 400px; width: 400px">
+			<div class="mb-3">
+				<div class="row row-cols-1 row-cols-md-2 g-3">
+					<div class="col">
+                  <div class="card flex-row h-100">
+                     <div class="card-header">
+                        <img src="/icons/user-icon.svg" width="100" height="100" alt="...">
+                     </div>
+                     <div class="card-body my-auto">
+                        <h3 class="card-title">John Doe</h3>
+                        <p class="card-text">Author</p>
+                     </div>
+                  </div>
+					</div>
+					<div class="col">
+                  <div class="card flex-row h-100">
+                     <div class="card-body text-center my-auto border-end">
+                        <h5 class="card-title">Followers</h5>
+                        <p class="card-text fs-5">23</p>
+                     </div>
+                     <div class="card-body text-center my-auto">
+                        <h5 class="card-title">Viewers</h5>
+                        <p class="card-text fs-5">234</p>
+                     </div>
+                  </div>
+					</div>
+				</div>
+			</div>
+			<section class="mb-3">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+               <div class="col">
+                  <div class="card flex-row h-100 shadow-sm">
+                     <div class="card-header border-bottom-0">
+                        <i class="bi bi-file-earmark-text fs-1"></i>
+                     </div>
+                     <div class="card-body text-end">
+                        <h5 class="card-title">Articles</h5>
+                        <p class="card-text">456</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col">
+                  <div class="card flex-row h-100 shadow-sm">
+                     <div class="card-header border-bottom-0">
+                        <i class="bi bi-chat-square-text fs-1"></i>
+                     </div>
+                     <div class="card-body text-end">
+                        <h5 class="card-title">Comments</h5>
+                        <p class="card-text">456</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col">
+                  <div class="card flex-row h-100 shadow-sm">
+                     <div class="card-header border-bottom-0">
+                        <i class="bi bi-hand-thumbs-up fs-1"></i>
+                     </div>
+                     <div class="card-body text-end">
+                        <h5 class="card-title">Likes</h5>
+                        <p class="card-text">456</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col">
+                  <div class="card flex-row h-100 shadow-sm">
+                     <div class="card-header border-bottom-0">
+                        <i class="bi bi-people fs-1"></i>
+                     </div>
+                     <div class="card-body text-end">
+                        <h5 class="card-title">Followings</h5>
+                        <p class="card-text">456</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <section>
+            <div class="row row-cols-1 row-cols-lg-2 g-3">
+               <div class="col">
+                  <div class="card">
+                     <h5 class="card-header">Published Articles</h5>
+                     <div class="card-body">
+                        <div>
+                           <canvas id="PostChart"></canvas>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col">
+                  <div class="card">
+                     <h5 class="card-header">Gained Views</h5>
+                     <div class="card-body">
+                        <div>
+                           <canvas id="ViewChart"></canvas>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+		</div>
+	</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.1/chart.min.js"></script>
+<script>
+   const labels = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+   ];
+   const posts = {
+      labels: labels,
+      datasets: [
+         {
+            label: 'Monthley Posts',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30],
+         }
+      ]
+   };
+   const views = {
+      labels: labels,
+      datasets: [
+         {
+            label: 'Monthley Views',
+            backgroundColor: 'rgb(132, 99, 255)',
+            borderColor: 'rgb(132, 99, 255)',
+            data: [0, 10, 5, 2, 20, 30],
+         }
+      ]
+   };
+
+   const PostConfig = {
+      type: 'bar',
+      data: posts,
+      options: {}
+   };
+
+   const ViewConfig = {
+      type: 'line',
+      data: views,
+      options: {}
+   };
+         
+   var PostChart = new Chart(
+      document.getElementById('PostChart'),
+      PostConfig
+   );
+
+   var ViewChart = new Chart(
+      document.getElementById('ViewChart'),
+      ViewConfig
+   );
+</script>
