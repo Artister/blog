@@ -53,8 +53,8 @@ class Startup
         
         $app->useEndpoint(function($routes)
         {
-            $routes->mapRoute("user", "user/{controller=Home}/{action=Index}/{id?}");
-            $routes->mapRoute("admin", "admin/{controller=Home}/{action=Index}/{id?}");
+            $routes->mapRoute("user", "user/{controller=Account}/{action=Index}/{id?}");
+            $routes->mapRoute("admin", "admin/{controller=Dashboard}/{action=Index}/{id?}");
             $routes->mapRoute("default", "{controller=Home}/{action=Index}/{id?}");
         });
     }
