@@ -16,7 +16,8 @@ class Post implements IEntity
     private string $Excerpt;
     private string $Image;
     private string $Content;
-    private DateTime $EditedAt;
+    private string $EditedAt;
+    private ?string   $Featured;
 
     // navigation properties
     private Author $Author;
@@ -30,11 +31,10 @@ class Post implements IEntity
 
     public function __set(string $name, $value)
     {
-        if (!property_exists($this, $name))
-        {
+        if (!property_exists($this, $name)) {
             throw new \Exception("The property {$name} doesn't exist.");
         }
-        
+
         $this->$name = $value;
     }
 }
