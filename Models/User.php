@@ -2,7 +2,7 @@
 
 namespace Application\Models;
 
-use DevNet\Web\Identity\User as IdentityUser;
+use DevNet\Core\Identity\User as IdentityUser;
 
 class User extends IdentityUser
 {

@@ -3,10 +3,10 @@
 namespace Application\Controllers;
 
 use DevNet\Entity\EntityContext;
-use DevNet\Web\Mvc\Controller;
-use DevNet\Web\Mvc\IActionResult;
+use DevNet\Core\Controller\AbstractController;
+use DevNet\Core\Controller\IActionResult;
 
-class BlogController extends Controller
+class BlogController extends AbstractController
 {
     public function __construct(EntityContext $dbManager)
     {

@@ -2,17 +2,17 @@
 
 namespace Application\Controllers\User;
 
-use DevNet\Web\Mvc\Controller;
-use DevNet\Web\Mvc\IActionResult;
-use DevNet\Web\Mvc\Filters\AuthorizeFilter;
-use DevNet\Web\Mvc\Filters\AntiForgeryFilter;
-use DevNet\Web\Identity\IdentityManager;
-use DevNet\Web\Identity\UserManager;
+use DevNet\Core\Controller\AbstractController;
+use DevNet\Core\Controller\IActionResult;
+use DevNet\Core\Controller\Filters\AuthorizeFilter;
+use DevNet\Core\Controller\Filters\AntiForgeryFilter;
+use DevNet\Core\Identity\IdentityManager;
+use DevNet\Core\Identity\UserManager;
 use Application\Models\LoginForm;
 use Application\Models\RegisterForm;
 use Application\Models\User;
 
-class AccountController extends Controller
+class AccountController extends AbstractController
 {
     private IdentityManager $Identity;
     private UserManager $Users;

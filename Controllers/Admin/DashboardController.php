@@ -2,11 +2,11 @@
 
 namespace Application\Controllers\Admin;
 
-use DevNet\Web\Mvc\Controller;
-use DevNet\Web\Mvc\IActionResult;
-use DevNet\Web\Mvc\Filters\AuthorizeFilter;
+use DevNet\Core\Controller\AbstractController;
+use DevNet\Core\Controller\IActionResult;
+use DevNet\Core\Controller\Filters\AuthorizeFilter;
 
-class DashboardController extends Controller
+class DashboardController extends AbstractController
 {
     public function __construct()
     {

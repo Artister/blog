@@ -2,11 +2,11 @@
 
 namespace Application\Controllers\User;
 
-use DevNet\Web\Mvc\Controller;
-use DevNet\Web\Mvc\IActionResult;
-use DevNet\Web\Mvc\Filters\AuthorizeFilter;
+use DevNet\Core\Controller\AbstractController;
+use DevNet\Core\Controller\IActionResult;
+use DevNet\Core\Controller\Filters\AuthorizeFilter;
 
-class PostsController extends Controller
+class PostsController extends AbstractController
 {
     public function __construct()
     {
