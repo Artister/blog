@@ -84,7 +84,7 @@
                                  </p>
                                  <h4 class="card-title"><?= $this->ViewData['featured'][$i]->Title ?></h4>
                                  <p class="card-text">
-                                    <small class="text-muted">On <?= $this->ViewData['featured'][$i]->EditedAt ?> | By Author Id
+                                    <small class="text-muted">On <?= $this->ViewData['featured'][$i]->EditedAt->format('j F Y') ?> | By Author Id
                                        <?= $this->ViewData['featured'][$i]->AuthorId ?></small>
                                  </p>
                                  <p class="card-text">
@@ -120,7 +120,7 @@
                         <div class="card-body">
                            <h5 class="card-title"><?= $recent->Title ?></h5>
                            <p class="card-text">
-                              <small class="text-muted">On <?= $recent->EditedAt ?> | By <?= $recent->AuthorId ?></small>
+                              <small class="text-muted">On <?= $recent->EditedAt->format('j F Y') ?> | By <?= $recent->AuthorId ?></small>
                            </p>
                            <p class="card-text">
                               <?= $recent->Content ?> </p>

@@ -7,15 +7,16 @@ use Application\Models\Comment;
 use Application\Models\Post;
 use Application\Models\Section;
 use Application\Models\User;
+use DevNet\Core\Identity\UserManager;
 use DevNet\Entity\EntityContext;
 use DevNet\System\Collections\ArrayList;
-use DevNet\Web\Identity\UserManager;
-use DevNet\Web\Mvc\Controller;
-use DevNet\Web\Mvc\IActionResult;
+use DevNet\Core\Controller\AbstractController;
+use DevNet\Core\Controller\IActionResult;
 use DevNet\System\Linq;
+use DateTime;
 use Faker;
 
-class SeederController extends Controller
+class SeederController extends AbstractController
 {
     private EntityContext $DbManager;
     private UserManager $Users;
@@ -152,7 +153,7 @@ class SeederController extends Controller
                 $post->Content = $faker->text(200);
                 $post->Featured = '1';
                 $post->Image = $pics[mt_rand(0, 9)] . ".png";
-                $post->EditedAt = $this->randomDate('2021-01-01', '2021-06-10');
+                $post->EditedAt = new DateTime('now');
                 $this->DbManager->Posts->add($post);
             }
         }

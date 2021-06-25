@@ -4,7 +4,7 @@
    <h1 class="text-info display-2 mx-auto fw-normal" style="text-shadow: 2px 2px 8px #000;">
       <h1 class="text-info display-2 mx-auto fw-normal" style="text-shadow: 2px 2px 8px #000;"><?= $model->Title ?></h1>
       <p class="lead w-75 mx-auto text-white fw-normal" style="text-shadow: 2px 2px 8px #000;">
-         By <?= $model->Author->Name ?> | On <?= $model->EditedAt ?>
+         By <?= $model->Author->Name ?> | On <?= $model->EditedAt->format('j F Y') ?>
       </p>
 </div>
 <div class="container">
@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-11">
                            <p class="fs-6 lh-sm">
-                              <b><?= $comment->Author->Name ?></b><span><small> | on <?= $comment->EditedAt ?></small></span>
+                              <b><?= $comment->Author->Name ?></b><span><small> | on <?= $comment->EditedAt->format('j F Y') ?></small></span>
                               <br>
                               <small><?= $comment->Content ?></small>
                            </p>
@@ -129,7 +129,7 @@
                   <!-----  <h6><= $comment->Author->Name ?></h6>  ---->
                   <div class="row fs-6 lh-sm">
                      <p class="fs-6 lh-sm">
-                        <span><small> <b><?= $comment->EditedAt ?></b></small></span>
+                        <span><small> <b><?= $comment->EditedAt->format('j F Y') ?></b></small></span>
                         <br>
                         <i class="bi bi-chat-left-text"></i>
                         <small><?= $comment->Content ?></small>
