@@ -29,6 +29,9 @@ class BlogController extends AbstractController
         $this->ViewData['comments'] = $comments->orderByDescending(fn ($c) => $c->Id)->take(6);
 
         $this->ViewData['page'] = 1;
+
+        $this->ViewData['formatter'] = new \Application\Lib\Formatter();
+
         return $this->view();
     }
 
@@ -92,6 +95,9 @@ class BlogController extends AbstractController
         if (!$post) {
             return $this->redirect("home/error");
         }
+
+        $this->ViewData['formatter'] = new \Application\Lib\Formatter();
+
         return $this->view("Blog/Post", $post);
     }
 }

@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-11">
                            <p class="fs-6 lh-sm">
-                              <b><?= $comment->Author->Name ?></b><span><small> | on <?= $comment->EditedAt->format('j F Y') ?></small></span>
+                              <b><?= $comment->Author->Name ?></b><span><small> | <?= $this->ViewData['formatter']->formatDateDiff($comment->EditedAt) ?></small></span>
                               <br>
                               <small><?= $comment->Content ?></small>
                            </p>
@@ -129,7 +129,7 @@
                   <!-----  <h6><= $comment->Author->Name ?></h6>  ---->
                   <div class="row fs-6 lh-sm">
                      <p class="fs-6 lh-sm">
-                        <span><small> <b><?= $comment->EditedAt->format('j F Y') ?></b></small></span>
+                        <span><small> <b><?= $this->ViewData['formatter']->formatDateDiff($comment->EditedAt) ?></b></small></span>
                         <br>
                         <i class="bi bi-chat-left-text"></i>
                         <small><?= $comment->Content ?></small>

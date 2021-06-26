@@ -94,10 +94,9 @@
             </h6>
             <ul class="nav flex-column mb-2">
                <?php foreach ($this->ViewData['comments'] as $comment) : ?>
-                  <!-----  <h6><= $comment->Author->Name ?></h6>  ---->
                   <div class="row fs-6 lh-sm">
                      <p class="fs-6 lh-sm">
-                        <span><small> <b><?= $comment->EditedAt->format('j F Y') ?></b></small></span>
+                        <span><small> <b><?= $this->ViewData['formatter']->formatDateDiff($comment->EditedAt) ?></b></small></span>
                         <br>
                         <i class="bi bi-chat-left-text"></i>
                         <small><?= $comment->Content ?></small>
