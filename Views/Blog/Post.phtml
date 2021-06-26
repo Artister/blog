@@ -44,12 +44,12 @@
                   <h4>Comments</h4>
                   <form method="post" action="/user/comment/new/<?= $model->Id ?>">
                      <textarea class="form-control h-100" id="message" name="Message" placeholder="Your Comment *" onfocus="show(true)" required=""></textarea>
-                     <button type="submit" class="btn btn-info text-white" id="send">Send</button>
-
+                     <div class="mt-2 text-end">
+                        <button type="submit" class="btn btn-info text-white" id="send">Send</button>
+                     </div>
                   </form>
                   <br>
                   <?php foreach (array_reverse($model->Comments->toArray()) as $comment) : ?>
-                     <!-----  <h6><= $comment->Author->Name ?></h6>  ---->
                      <div class="row fs-6 lh-sm">
                         <div class="col-1">
                            <img class="img-fluid rounded-circle" src="<?= $comment->Author->Picture ?>" alt="">
@@ -62,7 +62,6 @@
                            </p>
                         </div>
                      </div>
-
                   <?php endforeach ?>
                </div>
             </aside>
