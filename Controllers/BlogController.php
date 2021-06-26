@@ -58,6 +58,8 @@ class BlogController extends AbstractController
         // give the view the section
         $this->ViewData['section'] = $section;
 
+        $this->ViewData['formatter'] = new \Application\Lib\Formatter();
+
         return $this->view();
     }
 
@@ -77,7 +79,10 @@ class BlogController extends AbstractController
         $comments = $this->DbManager->Comments;
 
         $this->ViewData['comments'] = $comments->orderByDescending(fn ($c) => $c->Id)->take(6);
-        return $this->View();
+
+        $this->ViewData['formatter'] = new \Application\Lib\Formatter();
+
+        return $this->View("Blog/Index");
     }
 
     public function post(int $id): IActionResult
