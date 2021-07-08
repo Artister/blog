@@ -13,6 +13,7 @@
     "require": {
         "php": ">=7.4.0",
         "devnet/web": "dev-master",
-        "devnet/entity": "dev-master"
+        "devnet/entity": "dev-master",
+        "fakerphp/faker": "1.15.x-dev"
     }
 }

@@ -23,17 +23,17 @@ class Startup
     public function configureServices(IServiceCollection $services)
     {
         $services->addMvc();
-        
+
         $services->addAntiforgery();
 
-        $services->addAuthentication(function($options)
+        $services->addAuthentication(function ($options)
         {
             $options->LoginPath = '/user/account/login';
         });
 
         $services->addAuthorisation();
 
-        $services->addEntityContext(DbManager::class, function($options)
+        $services->addEntityContext(DbManager::class, function ($options)
         {
             $options->useMysql("//root:root@127.0.0.1/blog");
         });
@@ -48,7 +48,7 @@ class Startup
         $app->useRouter();
 
         $app->useAuthentication();
-        
+
         $app->useAuthorization();
         
         $app->useEndpoint(function($routes)

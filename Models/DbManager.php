@@ -21,6 +21,7 @@ class DbManager extends EntityContext
       $this->Sections = $this->set(Section::class);
       $this->Posts    = $this->set(Post::class);
       $this->Comments = $this->set(Comment::class);
+      $this->Users = $this->set(User::class);
    }
 
    public function __get(string $name)
@@ -31,13 +32,13 @@ class DbManager extends EntityContext
    public function onModelCreate(EntityModelBuilder $builder)
    {
       $builder->entity(User::class)
-      ->hasOne('Author', Author::class);
+         ->hasOne('Author', Author::class);
 
       $builder->entity(Author::class)
-      ->hasForeignKey('UserId', User::class)
-      ->hasOne('User', User::class)
-      ->hasMany('Posts', Post::class);
-      
+         ->hasForeignKey('UserId', User::class)
+         ->hasOne('User', User::class)
+         ->hasMany('Posts', Post::class);
+
       $builder->entity(Section::class)
          ->hasMany('Posts', Post::class);
 
