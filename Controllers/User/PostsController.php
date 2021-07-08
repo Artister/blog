@@ -17,4 +17,9 @@ class PostsController extends AbstractController
     {
         return $this->view();
     }
+
+    public function new() : IActionResult
+    {
+        return $this->view();
+    }
 }
