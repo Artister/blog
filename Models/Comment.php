@@ -11,7 +11,7 @@ class Comment implements IEntity
     private int $PostId;
     private int $AuthorId;
     private string $Content;
-    private ?string $EditedAt;
+    private DateTime $EditedAt;
 
     // navigation properties
     private Post $Post;
@@ -24,11 +24,10 @@ class Comment implements IEntity
 
     public function __set(string $name, $value)
     {
-        if (!property_exists($this, $name))
-        {
+        if (!property_exists($this, $name)) {
             throw new \Exception("The property {$name} doesn't exist.");
         }
-        
+
         $this->$name = $value;
     }
 }

@@ -1,10 +1,10 @@
 <aside class="px-3 pb-3">
    <form action="#">
       <div class="input-group">
-      <input class="form-control" type="search" placeholder="Enter your email address" aria-label="email address" aria-describedby="button-addon2">
-      <div class="input-group-append ml-2">
-         <button class="btn btn-danger" id="button-addon2" type="submit">Subscribe</button>
-      </div>
+         <input class="form-control" type="search" placeholder="Enter your email address" aria-label="email address" aria-describedby="button-addon2">
+         <div class="input-group-append ml-2">
+            <button class="btn btn-danger" id="button-addon2" type="submit">Subscribe</button>
+         </div>
       </div>
    </form>
 </aside>
@@ -38,24 +38,14 @@
       Sections
    </h6>
    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-         <a class="nav-link text-dark border-bottom" href="#">
-            <i class="bi bi-folder2-open lh-1"></i>
-            News
-         </a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link text-dark border-bottom" href="#">
-            <i class="bi bi-folder2-open lh-1"></i>
-            Events
-         </a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link text-dark border-bottom" href="#">
-            <i class="bi bi-folder2-open lh-1"></i>
-            Ternding
-         </a>
-      </li>
+      <?php foreach ($this->ViewData['sections'] as $section) : ?>
+         <li class="nav-item">
+            <a class="nav-link text-dark border-bottom" href="/blog/section/<?= $section->Id ?>">
+               <i class="bi bi-folder2-open lh-1"></i>
+               <?= $section->Title ?>
+            </a>
+         </li>
+      <?php endforeach ?>
    </ul>
 </aside>
 <aside class="p-3">
@@ -63,23 +53,17 @@
       Recent Comments
    </h6>
    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-         <a class="nav-link text-dark border-bottom" href="#">
-         <i class="bi bi-chat-text"></i>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-         </a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link text-dark border-bottom" href="#">
-            <i class="bi bi-chat-text"></i>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-         </a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link text-dark border-bottom" href="#">
-            <i class="bi bi-chat-text"></i>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-         </a>
-      </li>
+      <?php foreach ($this->ViewData['comments'] as $comment) : ?>
+         <div class="row fs-6 lh-sm">
+            <p class="fs-6 lh-sm">
+               <span><small> <b><?= $this->ViewData['formatter']->formatDateDiff($comment->EditedAt) ?></b></small></span>
+               <br>
+               <i class="bi bi-chat-left-text"></i>
+               <small><?= $comment->Content ?></small>
+               <br>
+               <small><a href="">Read more</a></small>
+            </p>
+         </div>
+      <?php endforeach ?>
    </ul>
 </aside>
