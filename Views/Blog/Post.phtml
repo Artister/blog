@@ -1,4 +1,5 @@
 <?= $this->layout('Shared/Layout') ?>
+<?= $this->Inject('Formatter', \Application\Lib\Formatter::class) ?>
 
 <div class="d-flex flex-column justify-content-center text-center" style="height: 250px; background-image: url(/images/113-800x200.jpg); background-size: cover;">
    <h1 class="text-info display-2 mx-auto fw-normal" style="text-shadow: 2px 2px 8px #000;">
@@ -56,7 +57,7 @@
                         </div>
                         <div class="col-11">
                            <p class="fs-6 lh-sm">
-                              <b><?= $comment->Author->Name ?></b><span><small> | <?= $this->ViewData['formatter']->formatDateDiff($comment->EditedAt) ?></small></span>
+                              <b><?= $comment->Author->Name ?></b><span><small> | <?= $this->Formatter->formatDateDiff($comment->EditedAt) ?></small></span>
                               <br>
                               <small><?= $comment->Content ?></small>
                            </p>

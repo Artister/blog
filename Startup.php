@@ -10,6 +10,7 @@ use DevNet\Core\Extensions\ApplicationBuilderExtensions;
 use DevNet\Entity\Providers\EntityOptionsExtensions;
 use Application\Models\DbManager;
 use Application\Models\User;
+use Application\Lib\Formatter;
 
 class Startup
 {
@@ -26,19 +27,19 @@ class Startup
 
         $services->addAntiforgery();
 
-        $services->addAuthentication(function ($options)
-        {
+        $services->addAuthentication(function ($options) {
             $options->LoginPath = '/user/account/login';
         });
 
         $services->addAuthorisation();
 
-        $services->addEntityContext(DbManager::class, function ($options)
-        {
+        $services->addEntityContext(DbManager::class, function ($options) {
             $options->useMysql("//root:root@127.0.0.1/blog");
         });
 
         $services->addIdentity(User::class);
+
+        $services->addSingleton(Formatter::class);
     }
 
     public function configure(IApplicationBuilder $app)
@@ -50,9 +51,8 @@ class Startup
         $app->useAuthentication();
 
         $app->useAuthorization();
-        
-        $app->useEndpoint(function($routes)
-        {
+
+        $app->useEndpoint(function ($routes) {
             $routes->mapRoute("user", "user/{controller=Account}/{action=Index}/{id?}");
             $routes->mapRoute("admin", "admin/{controller=Dashboard}/{action=Index}/{id?}");
             $routes->mapRoute("default", "{controller=Home}/{action=Index}/{id?}");
