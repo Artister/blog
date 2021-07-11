@@ -6,55 +6,68 @@
 <div class="container-fluid" style="background-color: #f0f4f7;">
 	<div class="row">
       <aside class="bg-white" style="width: 200px;">
-         <?= $this->renderPartial('Shared/UserSideBar') ?>
+         <?= $this->renderPartial('Shared/UserSidebar') ?>
       </aside>
 		<div class="d-flex flex-grow-1 flex-column px-4 py-3" style="min-height: 400px; width: 400px">
-         <header class="my-3">
-            <h3 class="text-uppercase">new Article</h3>
-         </header>
          <form method="post" action="/user/posts/new">
-            <div class="row">
-               <div class="col-md-9 mb-3">
-                  <select name="Status" class="form-select" style="width: 230px;">
-                     <option value="1">Draft</option>
-                     <option value="2">Published</option>
-                     <option value="3">Archived</option>
-                  </select>
+            <div class="row mt-3">
+               <div class="col-md-8">
+                  <div class="row">
+                     <div class="col-md">
+                        <header class="ps-1 mb-3">
+                           <h3 class="text-uppercase">new Article</h3>
+                        </header>
+                     </div>
+                  </div>
                </div>
-               <div class="col-md-3 text-end mb-3">
+               <div class="col-md-4 text-center mb-3">
                   <button type="submit" class="btn btn-primary" style="height: 38px; width: 49%"><i class="bi bi-check-lg me-1"></i>Save</button>
                   <a class="btn btn-secondary" href="/user/posts" style="height: 38px; width: 49%"><i class="bi bi-x-lg me-1"></i>Cancel</a>
                </div>
             </div>
             <div class="row">
-               <div class="col-md-9">
+               <div class="col-md-8">
                   <div class="card mb-3">
                      <div class="card-body p-4">
                         <div class="mb-3">
                            <label for="title" class="form-label">Title</label>
                            <input type="text" class="form-control" id="title" name="Title">
                         </div>
-                        <div class="mb-1">
+                        <div class="mb-3">
                            <label for="content" class="form-label">Content</label>
                            <textarea id="content" name="Content" style="display: none;"></textarea>
-                           <div id="editor" style="height: 325px;"></div>
+                           <div id="editor" style="height: 394px;"></div>
+                        </div>
+                        <div class="mb-1">
+                           <label for="excerpt" class="form-label">Excerpt</label>
+                           <textarea class="form-control" id="excerpt" name="Excerpt" rows="3"></textarea>
                         </div>
                      </div>
                   </div>
                </div>
-               <div class="col-md-3">
+               <div class="col-md-4">
                   <div class="card mb-3">
-                     <div class="card-header">
-                        Permalink
+                     <div class="card-header bg-white">
+                        Status
                      </div>
                      <div class="card-body">
-                        <div class="mb-3">
-                           <input type="text" class="form-control" id="slug" name="Slug">
-                        </div>
+                        <select class="form-select" id="status" name="Status">
+                           <option value="1">Draft</option>
+                           <option value="2">Published</option>
+                           <option value="3">Archived</option>
+                        </select>
                      </div>
                   </div>
                   <div class="card mb-3">
-                     <div class="card-header">
+                     <div class="card-header bg-white">
+                        Date
+                     </div>
+                     <div class="card-body">
+                        <input type="date" class="form-control" id="date" name="Date">
+                     </div>
+                  </div>
+                  <div class="card mb-3">
+                     <div class="card-header bg-white">
                         Section
                      </div>
                      <div class="card-body">
@@ -66,7 +79,7 @@
                      </div>
                   </div>
                   <div class="card mb-3">
-                     <div class="card-header">
+                     <div class="card-header bg-white">
                         Image
                      </div>
                      <div class="card-body">
@@ -77,11 +90,26 @@
                      </div>
                   </div>
                   <div class="card mb-3">
-                     <div class="card-header">
-                     Excerpt
+                     <div class="card-header bg-white">
+                        Permalink
                      </div>
                      <div class="card-body">
-                        <textarea class="form-control" id="excerpt" name="Excerpt" rows="3"></textarea>
+                        <input type="text" class="form-control" id="slug" name="Slug">
+                     </div>
+                  </div>
+                  <div class="card mb-3">
+                     <div class="card-header bg-white">
+                        Options
+                     </div>
+                     <div class="card-body">
+                        <div>
+                           <input class="form-check-input" type="checkbox" id="commented" name="Commented" checked>
+                           <label class="form-check-label" for="commented">Allow Comments</label>
+                        </div>
+                        <div>
+                           <input class="form-check-input" type="checkbox" id="featured" name="Featured">
+                           <label class="form-check-label" for="featured">Featured</label>
+                        </div>
                      </div>
                   </div>
                </div>
