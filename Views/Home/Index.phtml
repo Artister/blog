@@ -29,34 +29,68 @@
    </div>
 </div>
 <!-- /Newsletter -->
-<!-- Blog Sections -->
+<!-- Sections carousel -->
 <section class="text-center bg-light">
    <br><br>
    <div class="container">
-      <h2 class="text-uppercase text-dark">Sections</h2>
-      <p>
-         Browse our classified Blog Sections
+      <br><br>
+      <h2 class="text-uppercase text-center">Sections</h2>
+      <p class="text-center">
+         Browse our classified Blog Sections.
       </p>
       <br>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-         <?php foreach ($this->ViewData['sections'] as $section) : ?>
-            <div class="col">
-               <div class="card shadow-sm h-100">
-                  <div class="card-body d-flex flex-column justify-content-center">
-                     <h5 class="card-title"><?= $section->Title ?></h5>
-                     <p class="card-text">
-                        <?= $section->Description ?>
-                     </p>
-                  </div>
-                  <a class="btn btn-danger text-white mx-auto mb-4" href="/blog/section/<?= $section->Id ?>">
-                     View Blogs</a>
+      <div id="sectioncarousel" class="carousel slide" data-bs-ride="carousel">
+         <div class="carousel-inner">
+            <div class="carousel-item active">
+               <div class="row row-cols-1 row-cols-md-3 g-4">
+                  <?php for ($i = 0; $i < 3; $i++) : ?>
+                     <div class="col-4">
+                        <div class="card shadow-sm h-100">
+                           <div class="card-body d-flex flex-column justify-content-center">
+                              <h5 class="card-title"><?= $this->ViewData['sections'][$i]->Title ?></h5>
+                              <p class="card-text">
+                                 <?= $this->ViewData['sections'][$i]->Description ?>
+                              </p>
+                           </div>
+                           <a class="btn btn-danger text-white mx-auto mb-4" href="/blog/section/<?= $this->ViewData['sections'][$i]->Id ?>">
+                              View Blogs</a>
+                        </div>
+                     </div>
+                  <?php endfor ?>
                </div>
             </div>
-         <?php endforeach ?>
+            <div class="carousel-item">
+               <div class="row row-cols-1 row-cols-md-3 g-4">
+                  <?php for ($i = 3; $i < 6; $i++) : ?>
+                     <div class="col-4">
+                        <div class="card shadow-sm h-100">
+                           <div class="card-body d-flex flex-column justify-content-center">
+                              <h5 class="card-title"><?= $this->ViewData['sections'][$i]->Title ?></h5>
+                              <p class="card-text">
+                                 <?= $this->ViewData['sections'][$i]->Description ?>
+                              </p>
+                           </div>
+                           <a class="btn btn-danger text-white mx-auto mb-4" href="/blog/section/<?= $this->ViewData['sections'][$i]->Id ?>">
+                              View Blogs</a>
+                        </div>
+                     </div>
+                  <?php endfor ?>
+               </div>
+            </div>
+         </div>
+         <button class="carousel-control-prev" type="button" data-bs-target="#sectioncarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+         </button>
+         <button class="carousel-control-next" type="button" data-bs-target="#sectioncarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+         </button>
       </div>
-      <br><br><br>
+   </div>
+   <br><br><br>
 </section>
-<!-- /Blog Sections -->
+<!-- /Section carousel -->
 <!-- Featured carousel -->
 <div class="container">
    <br><br>
@@ -84,7 +118,7 @@
                                  </p>
                                  <h4 class="card-title"><?= $this->ViewData['featured'][$i]->Title ?></h4>
                                  <p class="card-text">
-                                    <small class="text-muted">On <?= $this->ViewData['featured'][$i]->EditedAt ?> | By Author Id
+                                    <small class="text-muted">On <?= $this->ViewData['featured'][$i]->EditedAt->format('j F Y') ?> | By Author Id
                                        <?= $this->ViewData['featured'][$i]->AuthorId ?></small>
                                  </p>
                                  <p class="card-text">
@@ -101,7 +135,6 @@
       </div>
    </div>
    <!-- /Featured carousel -->
-
    <!-- Recent Articles -->
    <section class="bg-light">
       <div class="container">
@@ -120,7 +153,7 @@
                         <div class="card-body">
                            <h5 class="card-title"><?= $recent->Title ?></h5>
                            <p class="card-text">
-                              <small class="text-muted">On <?= $recent->EditedAt ?> | By <?= $recent->AuthorId ?></small>
+                              <small class="text-muted">On <?= $recent->EditedAt->format('j F Y') ?> | By <?= $recent->AuthorId ?></small>
                            </p>
                            <p class="card-text">
                               <?= $recent->Content ?> </p>

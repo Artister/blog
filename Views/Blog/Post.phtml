@@ -4,7 +4,7 @@
    <h1 class="text-info display-2 mx-auto fw-normal" style="text-shadow: 2px 2px 8px #000;">
       <h1 class="text-info display-2 mx-auto fw-normal" style="text-shadow: 2px 2px 8px #000;"><?= $model->Title ?></h1>
       <p class="lead w-75 mx-auto text-white fw-normal" style="text-shadow: 2px 2px 8px #000;">
-         By <?= $model->Author->Name ?> | On <?= $model->EditedAt ?>
+         By <?= $model->Author->Name ?> | On <?= $model->EditedAt->format('j F Y') ?>
       </p>
 </div>
 <div class="container">
@@ -44,25 +44,24 @@
                   <h4>Comments</h4>
                   <form method="post" action="/user/comment/new/<?= $model->Id ?>">
                      <textarea class="form-control h-100" id="message" name="Message" placeholder="Your Comment *" onfocus="show(true)" required=""></textarea>
-                     <button type="submit" class="btn btn-info text-white" id="send">Send</button>
-
+                     <div class="mt-2 text-end">
+                        <button type="submit" class="btn btn-info text-white" id="send">Send</button>
+                     </div>
                   </form>
                   <br>
                   <?php foreach (array_reverse($model->Comments->toArray()) as $comment) : ?>
-                     <!-----  <h6><= $comment->Author->Name ?></h6>  ---->
                      <div class="row fs-6 lh-sm">
                         <div class="col-1">
                            <img class="img-fluid rounded-circle" src="<?= $comment->Author->Picture ?>" alt="">
                         </div>
                         <div class="col-11">
                            <p class="fs-6 lh-sm">
-                              <b><?= $comment->Author->Name ?></b><span><small> | on <?= $comment->EditedAt ?></small></span>
+                              <b><?= $comment->Author->Name ?></b><span><small> | <?= $this->ViewData['formatter']->formatDateDiff($comment->EditedAt) ?></small></span>
                               <br>
                               <small><?= $comment->Content ?></small>
                            </p>
                         </div>
                      </div>
-
                   <?php endforeach ?>
                </div>
             </aside>
@@ -70,76 +69,7 @@
          <br>
       </div>
       <div class="col-md-4">
-         <aside class="px-3 pb-3">
-            <form action="#">
-               <div class="input-group">
-                  <input class="form-control" type="search" placeholder="Enter your email address" aria-label="email address" aria-describedby="button-addon2">
-                  <div class="input-group-append ml-2">
-                     <button class="btn btn-danger" id="button-addon2" type="submit">Subscribe</button>
-                  </div>
-               </div>
-            </form>
-         </aside>
-         <aside class="p-3">
-            <h6 class="text-uppercase mb-1 text-muted">
-               Follow Us
-            </h6>
-            <ul class="nav flex-column mb-2">
-               <li class="nav-item">
-                  <a class="nav-link text-dark border-bottom" href="#">
-                     <i class="bi bi-facebook fs-5 lh-1"></i>
-                     Facebook
-                  </a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link text-dark border-bottom" href="#">
-                     <i class="bi bi-twitter fs-5 lh-1"></i>
-                     Twitter
-                  </a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link text-dark border-bottom" href="#">
-                     <i class="bi bi-youtube fs-5 lh-1"></i>
-                     Youtube
-                  </a>
-               </li>
-            </ul>
-         </aside>
-         <aside class="p-3">
-            <h6 class="text-uppercase mb-1 text-muted">
-               Sections
-            </h6>
-            <ul class="nav flex-column mb-2">
-               <?php foreach ($this->ViewData['sections'] as $section) : ?>
-                  <li class="nav-item">
-                     <a class="nav-link text-dark border-bottom" href="/blog/section/<?= $section->Id ?>">
-                        <i class="bi bi-folder2-open lh-1"></i>
-                        <?= $section->Title ?>
-                     </a>
-                  </li>
-               <?php endforeach ?>
-            </ul>
-         </aside>
-         <aside class="p-3">
-            <h6 class="text-uppercase mb-2 text-muted">
-               All Recent Comments
-            </h6>
-            <ul class="nav flex-column mb-2">
-               <?php foreach ($this->ViewData['comments'] as $comment) : ?>
-                  <!-----  <h6><= $comment->Author->Name ?></h6>  ---->
-                  <div class="row fs-6 lh-sm">
-                     <p class="fs-6 lh-sm">
-                        <span><small> <b><?= $comment->EditedAt ?></b></small></span>
-                        <br>
-                        <i class="bi bi-chat-left-text"></i>
-                        <small><?= $comment->Content ?></small>
-                        <br>
-                        <small><a href="">Read more</a></small>
-                     </p>
-                  </div>
-               <?php endforeach ?>
-            </ul>
-         </aside>
+         <?= $this->renderPartial('Shared/SideBar') ?>
       </div>
    </div>
 </div>
