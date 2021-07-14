@@ -80,7 +80,7 @@ class BlogController extends AbstractController
 
         $this->ViewData['comments'] = $comments->orderByDescending(fn ($c) => $c->Id)->take(6);
 
-        $this->ViewData['formatter'] = new \Application\Lib\Formatter();
+        // $this->ViewData['formatter'] = new \Application\Lib\Formatter();
 
         return $this->View("Blog/Index");
     }
